@@ -47,7 +47,7 @@ if __name__ == "__main__":
     neighbourhood_size = 10
 
     file_name = "google_review_ratings_small.csv" # the original file
-    train_dataset_file_name = "neighbourhood_train_data_before_prediction.csv"
+    train_dataset_file_name = "train_data_before_prediction.csv"
 
     f = open(file_name, 'r')
     reader = csv.reader(f)
@@ -58,11 +58,11 @@ if __name__ == "__main__":
         train_matrix.append([eval(i) for i in line[1:]])
     f.close()
 
-    # Output the neighbourhood_test_data.csv file
-    write_to_output_file("neighbourhood_test_data.csv", test_matrix)
+    # Output the test_data.csv file
+    write_to_output_file("test_data.csv", test_matrix)
 
     if os.path.exists(train_dataset_file_name):
-        print("neighbourhood_train_data_before_prediction.csv file exists, use this dataset to train.")
+        print("train_data_before_prediction.csv file exists, use this dataset to train.")
         train_matrix = []
         f = open(train_dataset_file_name, 'r')
         reader = csv.reader(f)
@@ -75,11 +75,11 @@ if __name__ == "__main__":
             for c in range(len(train_matrix[0])):
                 if random.random() > 0.3:
                     train_matrix[r][c] = 0
-        # Output the neighbourhood_train_data_before_prediction.csv file
-        write_to_output_file("neighbourhood_train_data_before_prediction.csv", train_matrix)
+        # Output the train_data_before_prediction.csv file
+        write_to_output_file("train_data_before_prediction.csv", train_matrix)
 
     compute(neighbourhood_size, train_matrix)
-    # Output the neighbourhood_train_data_before_prediction.csv file
+    # Output the train_data_before_prediction.csv file
     write_to_output_file("neighbourhood_train_data_after_prediction.csv", train_matrix)
 
     rmse = 0

@@ -129,7 +129,7 @@ if __name__ == "__main__":
     test_matrix = []
     latent_factor_size = 20
 
-    file_name = "google_review_ratings_test_small.csv" # the original file
+    file_name = "google_review_ratings_small.csv" # the original file
     train_dataset_file_name = "train_data_before_prediction.csv"
 
     f = open(file_name, 'r')
