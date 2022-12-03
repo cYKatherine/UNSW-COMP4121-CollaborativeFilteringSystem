@@ -5,6 +5,7 @@ import numpy as np
 import sys
 import random
 import os
+import re
 from scipy.spatial import distance
 
 def find_index_of_top_n_neighbours(neighbourhood_size, user_index, similarities):
@@ -43,14 +44,16 @@ def write_to_output_file(output_file_name, matrix):
 if __name__ == "__main__":
     train_matrix = []
     test_matrix = []
-    neighbourhood_size = 15
+    neighbourhood_size = 10
 
-    file_name = "google_review_ratings_test_small.csv" # the original file
+    file_name = "google_review_ratings_small.csv" # the original file
     train_dataset_file_name = "neighbourhood_train_data_before_prediction.csv"
 
     f = open(file_name, 'r')
     reader = csv.reader(f)
+    next(reader, None)  # skip the headers
     for line in reader:
+        line = [re.sub('\s+', '', s) for s in line]
         test_matrix.append([eval(i) for i in line[1:]])
         train_matrix.append([eval(i) for i in line[1:]])
     f.close()
@@ -84,5 +87,5 @@ if __name__ == "__main__":
         for j in range(len(test_matrix[0])):
             rmse += (train_matrix[i][j] - test_matrix[i][j]) ** 2
         rmse /= len(train_matrix)
-        rmse = math.sqrt(rmse)
+        rmse = round(math.sqrt(rmse),2)
     print("RMSE is {} after training using neighbourhood method with neighbourhood size {}".format(rmse, neighbourhood_size))
