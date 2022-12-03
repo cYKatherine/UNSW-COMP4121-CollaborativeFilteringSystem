@@ -7,9 +7,6 @@ import random
 import os
 import re
 
-u = []
-v = []
-
 def calculate_rmse(temp_train_matrix, train_matrix):
     rmse = 0
     for i in range(len(temp_train_matrix)):
@@ -54,7 +51,6 @@ def compute(latent_factor_size, train_matrix):
 
     rmse = calculate_rmse(temp_train_matrix, train_matrix)
     previous_rmse = rmse + 10
-    print(rmse)
     while (abs(previous_rmse - rmse) > 0.005):
         for (row, col) in permutation_u:
             top_sum = 0
