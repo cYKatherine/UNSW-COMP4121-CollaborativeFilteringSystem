@@ -44,7 +44,7 @@ def write_to_output_file(output_file_name, matrix):
 if __name__ == "__main__":
     train_matrix = []
     test_matrix = []
-    neighbourhood_size = 10
+    neighbourhood_size = 25
 
     file_name = "google_review_ratings_small.csv" # the original file
     train_dataset_file_name = "train_data_before_prediction.csv"
@@ -87,5 +87,5 @@ if __name__ == "__main__":
         for j in range(len(test_matrix[0])):
             rmse += (train_matrix[i][j] - test_matrix[i][j]) ** 2
         rmse /= len(train_matrix)
-        rmse = round(math.sqrt(rmse),2)
+        rmse = math.sqrt(rmse)
     print("RMSE is {} after training using neighbourhood method with neighbourhood size {}".format(rmse, neighbourhood_size))
